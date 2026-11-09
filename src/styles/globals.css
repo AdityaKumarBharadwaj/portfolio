@@ -1,0 +1,319 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-obsidian: #090909;
+    --color-charcoal: #111111;
+    --color-graphite: #1B1B1B;
+    --color-crimson: #D71935;
+    --color-yellow: #FFD43B;
+    --color-warm-white: #F3F0E8;
+    --color-muted: #A5A5A5;
+    --color-border: #303030;
+
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body: 'Manrope', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+    --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+    --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: clip;
+  }
+
+  body {
+    background-color: var(--color-obsidian);
+    color: var(--color-warm-white);
+    font-family: var(--font-body);
+    overflow-x: clip;
+    cursor: default;
+  }
+
+  @media (pointer: coarse) {
+    body {
+      cursor: auto;
+    }
+  }
+
+  ::selection {
+    background-color: var(--color-crimson);
+    color: var(--color-warm-white);
+  }
+
+  ::-webkit-scrollbar {
+    width: 2px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--color-obsidian);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-crimson);
+  }
+
+  *:focus-visible {
+    outline: 2px solid var(--color-yellow);
+    outline-offset: 4px;
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  .container-fluid {
+    @apply w-full px-6 md:px-12 lg:px-16 xl:px-24 max-w-[1800px] mx-auto;
+  }
+
+  .section-padding {
+    @apply py-24 md:py-32 lg:py-40;
+  }
+
+  .text-label {
+    @apply font-mono text-xs tracking-widest uppercase text-muted;
+  }
+
+  .text-display {
+    @apply font-display font-bold leading-none tracking-tight;
+  }
+
+  .text-body {
+    @apply font-body font-normal leading-relaxed text-text-secondary;
+  }
+
+  .btn-primary {
+    @apply relative inline-flex items-center gap-3 px-8 py-4 bg-crimson text-warm-white font-display font-semibold text-sm tracking-wide overflow-hidden transition-all duration-300;
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%);
+  }
+
+  .btn-primary::before {
+    @apply content-[''] absolute inset-0 bg-black/20 opacity-0 transition-opacity duration-300;
+  }
+
+  .btn-primary:hover::before {
+    @apply opacity-100;
+  }
+
+  .btn-primary:hover {
+    @apply scale-[1.02];
+  }
+
+  .btn-outline {
+    @apply relative inline-flex items-center gap-3 px-8 py-4 border border-border text-warm-white font-display font-semibold text-sm tracking-wide overflow-hidden transition-all duration-300;
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%);
+  }
+
+  .btn-outline:hover {
+    @apply border-crimson text-crimson;
+  }
+
+  .cursor-hovered > div {
+    transform: scale(1.6);
+    border-color: var(--color-crimson) !important;
+    background-color: rgba(215, 25, 53, 0.15) !important;
+  }
+
+  .line-accent {
+    @apply block h-px bg-crimson;
+  }
+
+  /* Interactive Cards: Thin subtle border by default, bold luminous border on hover */
+  .card-hover-bold {
+    border: 1px solid rgba(255, 255, 255, 0.16) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+    transition: all 0.35s cubic-bezier(0.19, 1, 0.22, 1);
+  }
+
+  .card-hover-bold:hover {
+    border-color: #ffffff !important;
+    box-shadow: 0 0 0 2px #ffffff, 0 0 35px rgba(255, 255, 255, 0.45), 0 16px 45px rgba(0, 0, 0, 0.95) !important;
+    transform: translateY(-6px);
+  }
+
+  /* Inner elements with thin border resting, bold border on hover */
+  .box-hover-bold {
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+  }
+
+  .group:hover .box-hover-bold,
+  .box-hover-bold:hover {
+    border-color: #ffffff !important;
+    box-shadow: 0 0 0 1.5px #ffffff, 0 0 20px rgba(255, 255, 255, 0.35) !important;
+  }
+
+  .btn-hover-bold {
+    border: 1px solid rgba(255, 255, 255, 0.25) !important;
+    transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+  }
+
+  .btn-hover-bold:hover {
+    border-color: #ffffff !important;
+    box-shadow: 0 0 0 1.5px #ffffff, 0 0 25px rgba(215, 25, 53, 0.5) !important;
+  }
+
+  /* Clip-path utilities */
+  .clip-reveal {
+    clip-path: inset(0 100% 0 0);
+  }
+
+  .clip-reveal-active {
+    clip-path: inset(0 0% 0 0);
+  }
+
+  /* Gradient overlays */
+  .gradient-overlay {
+    background: linear-gradient(to top, var(--color-obsidian) 0%, transparent 100%);
+  }
+
+  .gradient-radial-red {
+    background: radial-gradient(ellipse at center, rgba(215, 25, 53, 0.08) 0%, transparent 70%);
+  }
+
+  .gradient-radial-yellow {
+    background: radial-gradient(ellipse at center, rgba(255, 212, 59, 0.05) 0%, transparent 70%);
+  }
+}
+
+@layer utilities {
+  .writing-vertical {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+  }
+
+  .text-stroke {
+    -webkit-text-stroke: 1px var(--color-warm-white);
+    color: transparent;
+  }
+
+  .text-stroke-red {
+    -webkit-text-stroke: 1px var(--color-crimson);
+    color: transparent;
+  }
+
+  .mix-blend-difference {
+    mix-blend-mode: difference;
+  }
+
+  .will-transform {
+    will-change: transform;
+  }
+
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  /* Grid utilities */
+  .grid-12 {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 1.5rem;
+  }
+
+  @keyframes marquee-forward {
+    0% { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(-50%, 0, 0); }
+  }
+
+  @keyframes marquee-reverse {
+    0% { transform: translate3d(-50%, 0, 0); }
+    100% { transform: translate3d(0, 0, 0); }
+  }
+
+  .animate-marquee-forward {
+    animation: marquee-forward 30s linear infinite;
+    will-change: transform;
+  }
+
+  .animate-marquee-reverse {
+    animation: marquee-reverse 30s linear infinite;
+    will-change: transform;
+  }
+
+  /* Noise texture */
+  .noise::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* ============================================================
+     CARD HOVER BOLD BORDER & GLOW SYSTEM
+     Default: Thin, refined silver border (1.5px)
+     Hover: Visibly BOLD 3.5px pure white border with radiant halo
+     ============================================================ */
+  .card-hover-bold {
+    border: 1.5px solid rgba(192, 192, 192, 0.45);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+  }
+
+  .card-hover-bold:hover {
+    border-color: #ffffff !important;
+    box-shadow: 
+      0 0 0 2px #ffffff,
+      0 0 35px rgba(255, 255, 255, 0.55),
+      0 0 12px rgba(255, 255, 255, 0.8),
+      0 20px 45px rgba(0, 0, 0, 0.95) !important;
+    transform: translateY(-5px);
+  }
+
+  /* Inner Icon / Badge Container */
+  .box-hover-bold {
+    border: 1.5px solid rgba(192, 192, 192, 0.4);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .card-hover-bold:hover .box-hover-bold,
+  .box-hover-bold:hover {
+    border-color: #ffffff !important;
+    box-shadow: 
+      0 0 0 1.5px #ffffff,
+      0 0 20px rgba(255, 255, 255, 0.45) !important;
+  }
+
+  /* Buttons with thin border by default, bold on hover */
+  .btn-hover-bold {
+    border: 1.5px solid rgba(192, 192, 192, 0.6);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .btn-hover-bold:hover {
+    border-color: #ffffff !important;
+    box-shadow: 
+      0 0 0 1.5px #ffffff,
+      0 0 20px rgba(255, 255, 255, 0.45) !important;
+    transform: translateY(-1px);
+  }
+}
