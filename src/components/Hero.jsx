@@ -252,16 +252,16 @@ export default function Hero() {
               <span>Selected Work</span>
               <ArrowRight size={15} />
             </motion.button>
-            <motion.a
-              href={profile.resume}
-              target="_blank"
-              rel="noopener noreferrer"
+            <motion.button
+              onClick={() =>
+                document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })
+              }
               className="btn-outline"
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
             >
-              Resume
-            </motion.a>
+              <span>Get In Touch</span>
+            </motion.button>
           </div>
         </div>
 

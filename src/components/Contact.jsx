@@ -238,25 +238,6 @@ export default function Contact() {
                 </motion.a>
               ))}
             </div>
-
-            {/* Resume download */}
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-10%' }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="mt-8 pt-8 border-t border-border"
-            >
-              <p className="text-label mb-4">Also available</p>
-              <a
-                href={profile.resume}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-outline w-full text-center justify-center"
-              >
-                Download Resume
-              </a>
-            </motion.div>
           </div>
         </div>
 
