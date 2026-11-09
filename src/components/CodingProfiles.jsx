@@ -144,6 +144,7 @@ export default function CodingProfiles() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5 items-stretch">
           {codingProfiles.map((platform, idx) => {
             const iconSrc = iconMap[platform.id];
+            const hasLink = Boolean(platform.url);
             return (
               <motion.article
                 key={platform.id}
@@ -151,7 +152,9 @@ export default function CodingProfiles() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-8%' }}
                 transition={{ duration: 0.5, delay: idx * 0.08 }}
-                className="relative bg-gradient-to-b from-[#141414] via-[#101010] to-[#0a0a0a] rounded-2xl overflow-hidden p-5 flex flex-col justify-between group card-hover-bold transform-gpu cursor-pointer"
+                className={`relative bg-gradient-to-b from-[#141414] via-[#101010] to-[#0a0a0a] rounded-2xl overflow-hidden p-5 flex flex-col justify-between group card-hover-bold transform-gpu ${
+                  hasLink ? 'cursor-pointer' : 'cursor-default'
+                }`}
               >
                 {/* Luminous Silver Sheen top line */}
                 <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#FFFFFF] to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-300 shadow-[0_0_12px_#FFFFFF]" />
@@ -196,21 +199,28 @@ export default function CodingProfiles() {
                   </div>
                 </div>
 
-                {/* Bottom Action Footer: Open Profile Link & Icon */}
+                {/* Bottom Action Footer: Only show clickable link for LeetCode and GFG */}
                 <div className="pt-3 border-t border-white/10">
-                  <a
-                    href={platform.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full inline-flex items-center justify-center gap-2 px-3 py-2 text-xs font-mono font-semibold text-warm-white bg-gradient-to-r from-[#1c1c1c] to-[#141414] hover:bg-crimson hover:from-crimson hover:to-[#B3142B] btn-hover-bold rounded-xl group/btn"
-                    aria-label={`Open ${platform.name} profile in new tab`}
-                  >
-                    <span>Open Profile</span>
-                    <ExternalLink
-                      size={13}
-                      className="text-[#C0C0C0] group-hover/btn:text-white group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform duration-200"
-                    />
-                  </a>
+                  {hasLink ? (
+                    <a
+                      href={platform.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full inline-flex items-center justify-center gap-2 px-3 py-2 text-xs font-mono font-semibold text-warm-white bg-gradient-to-r from-[#1c1c1c] to-[#141414] hover:bg-crimson hover:from-crimson hover:to-[#B3142B] btn-hover-bold rounded-xl group/btn"
+                      aria-label={`Open ${platform.name} profile in new tab`}
+                    >
+                      <span>Open Profile</span>
+                      <ExternalLink
+                        size={13}
+                        className="text-[#C0C0C0] group-hover/btn:text-white group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform duration-200"
+                      />
+                    </a>
+                  ) : (
+                    <div className="w-full inline-flex items-center justify-center gap-2 px-3 py-2 text-xs font-mono text-[#71717A] bg-[#121212]/60 border border-white/5 rounded-xl select-none cursor-default">
+                      <span className="w-1.5 h-1.5 rounded-full bg-white/20" />
+                      <span>Practice Arena</span>
+                    </div>
+                  )}
                 </div>
               </motion.article>
             );

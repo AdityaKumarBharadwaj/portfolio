@@ -34,7 +34,7 @@ export const codingProfiles = [
     id: 'codeforces',
     name: 'Codeforces',
     handle: 'adityakumar',
-    url: 'https://codeforces.com/profile/adityakumar',
+    url: null,
     tagline: 'Global Rated Speed-Coding Contests',
     accentColor: '#1F8ACB', // Codeforces Blue
     badge: 'Contest Rounds',
@@ -47,7 +47,7 @@ export const codingProfiles = [
     id: 'codechef',
     name: 'CodeChef',
     handle: 'adityakumar',
-    url: 'https://www.codechef.com/users/adityakumar',
+    url: null,
     tagline: 'Rated Contests & Starters Challenges',
     accentColor: '#B57A42', // CodeChef Bronze
     badge: 'Starters & Cook-Offs',
@@ -60,7 +60,7 @@ export const codingProfiles = [
     id: 'atcoder',
     name: 'AtCoder',
     handle: 'adityakumar',
-    url: 'https://atcoder.jp/users/adityakumar',
+    url: null,
     tagline: 'Mathematical & Asymptotic Precision Contests',
     accentColor: '#E2E8F0', // AtCoder Silver/White
     badge: 'AtCoder Beginner & Regular',

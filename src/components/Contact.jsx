@@ -61,6 +61,22 @@ export default function Contact() {
     });
   };
 
+  const handleSendEmail = (e) => {
+    const subject = encodeURIComponent('Portfolio Collaboration / Opportunity');
+    const mailtoUrl = `mailto:${profile.email}?subject=${subject}`;
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(profile.email)}&su=${subject}`;
+
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    if (isMobile) {
+      window.location.href = mailtoUrl;
+      return;
+    }
+
+    e.preventDefault();
+    // Redirect directly to webmail composer in a new tab so user can send mail immediately
+    window.open(gmailUrl, '_blank', 'noopener,noreferrer');
+  };
+
   const headline = ["LET'S", 'BUILD', 'SOMETHING'];
   const headline2 = ['THAT', 'MATTERS.'];
 
@@ -165,8 +181,12 @@ export default function Contact() {
               className="space-y-4"
             >
               <a
-                href={`mailto:${profile.email}`}
-                className="btn-primary w-full md:w-auto justify-center md:justify-start"
+                href={`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(profile.email)}&su=${encodeURIComponent('Portfolio Collaboration / Opportunity')}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={handleSendEmail}
+                className="btn-primary w-full md:w-auto justify-center md:justify-start cursor-pointer"
+                aria-label="Send email via your mail client"
               >
                 <Mail size={16} />
                 <span>Send me an email</span>
@@ -192,9 +212,13 @@ export default function Contact() {
               {socialLinks.map((link, i) => (
                 <motion.a
                   key={link.id}
-                  href={link.url}
-                  target={link.id !== 'email' && link.id !== 'phone' ? '_blank' : undefined}
-                  rel={link.id !== 'email' && link.id !== 'phone' ? 'noopener noreferrer' : undefined}
+                  href={
+                    link.id === 'email'
+                      ? `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(profile.email)}&su=${encodeURIComponent('Portfolio Collaboration / Opportunity')}`
+                      : link.url
+                  }
+                  target={link.id !== 'phone' ? '_blank' : undefined}
+                  rel={link.id !== 'phone' ? 'noopener noreferrer' : undefined}
                   className="flex items-center justify-between p-5 border border-border hover:border-crimson/50 hover:bg-graphite group transition-all duration-300"
                   initial={{ opacity: 0, x: 20 }}
                   whileInView={{ opacity: 1, x: 0 }}
